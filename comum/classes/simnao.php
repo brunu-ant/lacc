@@ -4,7 +4,7 @@ use vijinho\Enums\Enum;
 
 class SimNaoEnum extends Enum{
 	protected static $values = [
-		1 => "Sim",
-		2 => "Não"
+		"Sim" => 1,
+		"Não" => 2
 	];
 }

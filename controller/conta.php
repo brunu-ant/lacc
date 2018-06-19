@@ -18,10 +18,16 @@ class Conta{
 	}
 	public static function criarConta($dados){
 		try{
-			$conta = new \Classes\Conta();
-			$conta->setNome($dados['nome']);
-			$conta->criar();
-
+			$oConta = new \Classes\Conta();
+			$oConta->setNome($dados['nomeEscola']);
+			$oConta->criar();
+			$oUsuario = new \Classes\Usuario();
+			$oUsuario->setConta($oConta);
+			$oUsuario->setNome($dados['nome']);
+			$oUsuario->setEmail($dados['email']);
+			$oUsuario->setSenha($dados['senha']);
+			$oUsuario->setPerfil((new \Comum\Classes\PerfilUsuarioEnum())->Coordenador());
+			$oUsuario->criar();
 		}catch(Exception $e){
 			echo 'Exceção capturada: ',  $e->getMessage(), "\n";
 		}
