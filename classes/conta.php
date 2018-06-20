@@ -3,8 +3,8 @@ namespace Classes;
 require_once \Config\Caminho::getModel()."conta.php";
 
 class Conta{
-	private $id;
-	private $nome;
+	private $iId;
+	private $sNome;
 	private $iAtivo;
 	private $oDataCadastro;
 
@@ -16,22 +16,22 @@ class Conta{
 		if (!$this->eValida()){
 			return false;
 		}
-		$this->id = \Model\Conta::inserir($this);
-		if (!empty($this->id)){
+		$this->iId = \Model\Conta::inserir($this);
+		if (!empty($this->iId)){
 			return true;
 		}
 	}
 	public function eValida(){
-		if (empty($this->nome)){
+		if (empty($this->sNome)){
 			return false;
 		}
 		return true;
 	}
 	public function getId(): int{
-		return $this->id;
+		return $this->iId;
 	}
 	public function getNome(): string{
-		return $this->nome;
+		return $this->sNome;
 	}
 	public function getAtivo(): int{
 		return $this->iAtivo;
@@ -39,16 +39,16 @@ class Conta{
 	public function getDataCadastro(): \DateTime{
 		return $this->oDataCadastro;
 	}
-	public function setId(int $id){
-		$this->id = id;
+	public function setId(int $iId){
+		$this->iId = $iId;
 	}
-	public function setNome(string $nome){
-		$this->nome = $nome;
+	public function setNome(string $sNome){
+		$this->sNome = $sNome;
 	}
 	public function setAtivo(int $iAtivo){
 		$this->iAtivo = $iAtivo;
 	}
-	public function setDataCadastro(DateTime $oDataCadastro){
+	public function setDataCadastro(\DateTime $oDataCadastro){
 		$this->dataCadastro = $oDataCadastro;
 	}
 }

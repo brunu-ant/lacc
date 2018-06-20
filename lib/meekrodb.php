@@ -31,7 +31,7 @@ class DB {
   public static $named_param_seperator = '_';
   public static $success_handler = false;
   public static $error_handler = true;
-  public static $throw_exception_on_error = false;
+  public static $throw_exception_on_error = true;
   public static $nonsql_error_handler = null;
   public static $throw_exception_on_nonsql_error = false;
   public static $nested_transactions = false;

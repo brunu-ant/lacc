@@ -15,4 +15,17 @@ class Usuario{
 		);
 		return \DB::insertId();
 	}
+	public static function getUsuarioByEmail(string $sEmail) : \Classes\Usuario {
+		$aDados = \DB::queryFirstRow("SELECT * FROM usuario WHERE email=%s", $sEmail);
+		$oUsuario = new \Classes\Usuario();
+		$oUsuario->setId($aDados['id']);
+		$oUsuario->setNome($aDados['nome']);
+		$oUsuario->setConta(\Model\Conta::getContaById($aDados['conta']));
+		$oUsuario->setPerfil($aDados['perfil']);
+		$oUsuario->setEmail($aDados['email']);
+		$oUsuario->setDataCadastro(new \DateTime($aDados['dataCadastro']));
+		$oUsuario->setAtivo($aDados['ativo']);
+		$oUsuario->setSenha($aDados['senha']);
+		return $oUsuario;
+	}
 }

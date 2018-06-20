@@ -3,11 +3,11 @@ namespace Classes;
 require_once \Config\Caminho::getModel()."usuario.php";
 
 class Usuario{
-	private $id;
-	private $conta;
-	private $nome;
-	private $senha;
-	private $email;
+	private $iId;
+	private $oConta;
+	private $sNome;
+	private $sSenha;
+	private $sEmail;
 	private $iPerfilUsuario;
 	private $iAtivo;
 	private $oDataCadastro;
@@ -21,19 +21,19 @@ class Usuario{
 			return false;
 		}
 
-		$this->id = \Model\Usuario::inserir($this);
-		if (!empty($this->id)){
+		$this->iId = \Model\Usuario::inserir($this);
+		if (!empty($this->iId)){
 			return true;
 		}
 	}
 	public function eValida(){
-		if (empty($this->nome)){
+		if (empty($this->sNome)){
 			throw new Exception("Informe o nome");
 		}
-		if (empty($this->senha)){
+		if (empty($this->sSenha)){
 			throw new Exception("Informe a senha");
 		}
-		if (empty($this->email)){
+		if (empty($this->sEmail)){
 			throw new Exception("Informe o email");
 		}
 		if (empty($this->iPerfilUsuario)){
@@ -45,22 +45,22 @@ class Usuario{
 		return true;
 	}
 	public function getId(): int{
-		return $this->id;
+		return $this->iId;
 	}
 	public function getConta(): \Classes\Conta{
 		return $this->oConta;
 	}
 	public function getNome(): string{
-		return $this->nome;
+		return $this->sNome;
 	}
 	public function getSenha(): string{
-		return $this->senha;
+		return $this->sSenha;
 	}
 	public function getPerfil(): int{
 		return $this->iPerfilUsuario;
 	}
 	public function getEmail(): string{
-		return $this->email;
+		return $this->sEmail;
 	}
 	public function getAtivo(): int{
 		return $this->iAtivo;
@@ -68,26 +68,29 @@ class Usuario{
 	public function getDataCadastro(): \DateTime{
 		return $this->oDataCadastro;
 	}
-	public function setId(int $id){
-		$this->id = id;
+	public function setId(int $iId){
+		$this->iId = $iId;
 	}
 	public function setConta(\Classes\Conta $oConta){
 		$this->oConta = $oConta;
 	}
-	public function setNome(string $nome){
-		$this->nome = $nome;
+	public function setNome(string $sNome){
+		$this->sNome = $sNome;
 	}
-	public function setSenha(string $senha){
-		$this->senha = sha1($senha);
+	public function setSenha(string $sSenha, bool $bCriptograr=false){
+		if ($bCriptograr){
+			$this->sSenha = sha1($sSenha);
+		}
+		$this->sSenha = $sSenha;
 	}
 	public function setPerfil(int $iPerfilUsuario){
 		$this->iPerfilUsuario = $iPerfilUsuario;
 	}
-	public function setEmail($email){
-		$this->email = $email;
+	public function setEmail($sEmail){
+		$this->sEmail = $sEmail;
 	}
-	public function setAtivo(\Comum\Classes\SimNaoEnum $oAtivo){
-		$this->oAtivo = $oAtivo;
+	public function setAtivo(int $iAtivo){
+		$this->iAtivo = $iAtivo;
 	}
 	public function setDataCadastro(\DateTime $oDataCadastro){
 		$this->dataCadastro = $oDataCadastro;
