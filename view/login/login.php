@@ -8,11 +8,11 @@
 	<form action="/lacc/controller/login.php" method="post">
 		<div class="form-group">
 			<label for="email">Email</label>
-			<input name="email" type="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Informe seu e-mail aqui" value="brunu.ant@gmail.com">
+			<input name="email" type="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Informe seu e-mail aqui">
 		</div>
 		<div class="form-group">
 			<label for="senha">Senha</label>
-			<input name="senha" id="senha" type="password" class="form-control" placeholder="Informe aqui a senha" value="123456">
+			<input name="senha" id="senha" type="password" class="form-control" placeholder="Informe aqui a senha">
 		</div>
 		<input name="acao" type="submit" class="btn btn-primary" value="Entrar">
 	</form>

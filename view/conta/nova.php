@@ -8,20 +8,20 @@
 	<form action="/lacc/controller/conta.php" method="post">
 		<div class="form-group">
 			<label for="nome">Nome da sua escola</label>
-			<input type="text" name="nomeEscola" id="nomeEscola" class="form-control" placeholder="Informe o nome da sua escola" value="LACC">
+			<input type="text" name="nomeEscola" id="nomeEscola" class="form-control" placeholder="Informe o nome da sua escola">
 		</div>
 		<div class="form-group">
 			<label for="nome">Seu nome</label>
-			<input type="text" name="nome" id="nome" class="form-control" placeholder="Informe o seu nome" value="Bruno Costa">
+			<input type="text" name="nome" id="nome" class="form-control" placeholder="Informe o seu nome">
 		</div>
 		<div class="form-group">
 			<label for="email">Email</label>
-			<input name="email" type="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Informe seu e-mail aqui" value="brunu.ant@gmail.com">
+			<input name="email" type="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Informe seu e-mail aqui">
 			<small id="emailHelp" class="form-text text-muted">Nao iremos compartilhar o seu e-mail com ninguem</small>
 		</div>
 		<div class="form-group">
 			<label for="senha">Senha</label>
-			<input name="senha" id="senha" type="password" class="form-control" placeholder="Informe aqui a senha" value="123456">
+			<input name="senha" id="senha" type="password" class="form-control" placeholder="Informe aqui a senha">
 		</div>
 		<input name="acao" type="submit" class="btn btn-primary" value="Criar conta">
 	</form>
