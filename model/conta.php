@@ -12,7 +12,7 @@ class Conta{
 		return \DB::insertId();
 	}
 	public static function getContaById(int $iId) : \Classes\Conta {
-		$aDados = \DB::queryFirstRow("SELECT * FROM conta WHERE id=%s", $iId);
+		$aDados = \DB::queryFirstRow("SELECT * FROM conta WHERE id=%i", $iId);
 		$oConta = new \Classes\Conta();
 		$oConta->setId($aDados['id']);
 		$oConta->setNome($aDados['nome']);

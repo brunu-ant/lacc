@@ -10,12 +10,11 @@ class Autorizacao{
 			throw new Exception("Necessario informar um usuario para autorizar o acesso");
 		}
 		$this->bAutorizado = true;
-		session_start();
-		$_SESSION['oAutorizacao'] = $this;
+		\Sistema\Sessao::set('oAutorizacao', $this);
 		return true;
 	}
 	public function revogar(){
-		$_SESSION['oAutorizacao'] = null;
+		\Sistema\Sessao::set('oAutorizacao', null);
 	}
 	public function estaAutorizado() : bool{
 		if (!$this->bAutorizado){
@@ -24,8 +23,7 @@ class Autorizacao{
 		return true;
 	}
 	public static function getAutorizacaoSessao() : \Sistema\Autorizacao{
-		session_start();
-		if (empty($_SESSION['oAutorizacao'])){
+		if (empty(\Sistema\Sessao::get('oAutorizacao'))){
 			throw new \Exception("O usuario nao esta autorizado a acessar esta parte do sistema");
 		}
 		return $_SESSION['oAutorizacao'];
@@ -33,7 +31,7 @@ class Autorizacao{
 	public function setUsuario(\Classes\Usuario $oUsuario){
 		$this->oUsuario = $oUsuario;
 	}
-	public function getUsuario() : bool{
+	public function getUsuario() : \Classes\Usuario{
 		return $this->oUsuario;
 	}
 	public function setAutorizado(book $bAutorizado){

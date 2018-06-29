@@ -1,6 +1,7 @@
 <?php
 namespace Classes;
 require_once \Config\Caminho::getModel()."conta.php";
+require_once \Config\Caminho::getModel()."ano.php";
 
 class Conta{
 	private $iId;
@@ -20,6 +21,13 @@ class Conta{
 		if (!empty($this->iId)){
 			return true;
 		}
+	}
+	public function registrarSessao(){
+		$oAno = $this->getAnoAtivo();
+		$oAno->registrarSessao();
+	}
+	public function getAnoAtivo() : \Classes\Ano{
+		return \Model\Ano::getAnoAtivoByContaId($this->getId());
 	}
 	public function eValida(){
 		if (empty($this->sNome)){

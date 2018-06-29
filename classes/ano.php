@@ -7,9 +7,11 @@ class Ano{
 	private $oConta;
 	private $iValor;
 	private $oDataCadastro;
+	private $iAtivo;
 
 	public function __construct(){
 		$this->oConta = (\Sistema\Autorizacao::getAutorizacaoSessao())->getUsuario()->getConta();
+		$this->iAtivo = (new \Comum\Classes\SimNaoEnum())->Sim();
 		$this->oDataCadastro = new \DateTime();
 	}
 	public function criar() : bool{
@@ -22,15 +24,13 @@ class Ano{
 		}
 	}
 	public function registrarSessao(){
-		session_start();
-		$_SESSION['oAno'] = $this;
+		\Sistema\Sessao::set('oAno', $this);
 	}
 	public static function getSessao() : \Classes\Ano{
-		session_start();
-		if (empty($_SESSION['oAno'])){
+		if (empty(\Sistema\Sessao::get('oAno'))){
 			throw new \Exception("Nao podemos dizer qual o ano o sistema esta trabalhando.");
 		}
-		return $_SESSION['oAno'];
+		return \Sistema\Sessao::get('oAno');
 	}
 
 	public function eValida(){
@@ -51,6 +51,9 @@ class Ano{
 	public function getDataCadastro(): \DateTime{
 		return $this->oDataCadastro;
 	}
+	public function getAtivo(): int{
+		return $this->iAtivo;
+	}
 	public function setId(int $iId){
 		$this->iId = $iId;
 	}
@@ -61,6 +64,9 @@ class Ano{
 		$this->iValor = $iValor;
 	}
 	public function setDataCadastro(\DateTime $oDataCadastro){
-		$this->dataCadastro = $oDataCadastro;
+		$this->oDataCadastro = $oDataCadastro;
+	}
+	public function setAtivo(int $iAtivo){
+		$this->iAtivo = $iAtivo;
 	}
 }

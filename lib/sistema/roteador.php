@@ -2,27 +2,34 @@
 namespace Sistema;
 
 class Roteador{
-	public static function mapearRequisicao(string $controller, array $dados){
-		if (empty($controller)){
+	public static function mapearRequisicao(string $sController, array $aDados){
+		if (empty($sController)){
 			return;
 		}
-		if (empty($dados)){
+		if (empty($aDados)){
 			return;
 		}
-		$acao = self::extrairAcao($dados);
+		$acao = self::extrairAcao($aDados);
 		if (empty($acao)){
 			return;
 		}
-		call_user_func("\\Controller\\{$controller}::{$acao}", $dados);
+		call_user_func("\\Controller\\{$sController}::{$acao}", $aDados);
 	}
 
-	private static function extrairAcao(array $dados) : string{
-		$acao = $dados["acao"];
+	public static function redirecionar(string $sUrl){
+		if (empty($sUrl)){
+			throw new Exception("Nao foi possivel redirecionar.");
+		}
+		header("location: /lacc".$sUrl);
+	}
 
-		if (!isset($acao) && empty($acao)){
+	private static function extrairAcao(array $aDados) : string{
+		$sAcao = $aDados["acao"];
+
+		if (!isset($sAcao) && empty($sAcao)){
 			return null;
 		}
-		return self::camelCase($acao);
+		return self::camelCase($sAcao);
 	}
 
 	private static function camelCase($str, array $noStrip = []){
@@ -35,5 +42,6 @@ class Roteador{
         $str = lcfirst($str);
 
         return $str;
-}
+	}
+
 }

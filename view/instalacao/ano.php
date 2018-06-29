@@ -5,16 +5,17 @@
 <body>
 <div class="container">
 	<h1>Vamos configurar a sua conta</h1>
-	<form action="/lacc/controller/conta.php" method="post">
+	<form action="/lacc/controller/instalacao.php" method="post">
 		<div class="btn-group btn-group-toggle" data-toggle="buttons">
 			<label class="btn btn-secondary active">
-				<input type="radio" name="ano" id="esteAno" autocomplete="off" checked> Este ano
+				<input type="radio" name="ano" id="esteAno" value="<?php echo (new \DateTime())->format("Y")?>" autocomplete="off" checked> Este ano
 			</label>
 			<label class="btn btn-secondary">
-				<input type="radio" name="ano" id="proximoAno" autocomplete="off"> Proximo ano
+				<input type="radio" name="ano" id="proximoAno" value="<?php echo (new \DateTime())->add(new DateInterval('P1Y'))->format("Y")?>" autocomplete="off"> Proximo ano
 			</label>
 		</div>
-		<input name="acao" type="submit" class="btn btn-primary" value="Proximo passo">
+		<input name="avancar" type="submit" class="btn btn-primary" value="Proximo passo">
+		<input name="acao" type="hidden" class="btn btn-primary" value="salvarAno">
 	</form>
 </div>
 
