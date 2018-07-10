@@ -14,8 +14,10 @@ require_once \Config\Caminho::getClasses()."conta.php";
 require_once \Config\Caminho::getClasses()."usuario.php";
 require_once \Config\Caminho::getClasses()."ano.php";
 require_once \Config\Caminho::getClasses()."semestre.php";
+require_once \Config\Caminho::getClasses()."turma.php";
 require_once \Config\Caminho::getComum()."classes/perfilusuario.php";
 require_once \Config\Caminho::getComum()."classes/simnao.php";
+require_once \Config\Caminho::getComum()."classes/turno.php";
 
 class Instalacao{
 	public static function index(array $aDados){
@@ -49,7 +51,6 @@ class Instalacao{
 	}
 	public static function salvarSemestre(array $aDados){
 		try{
-			var_dump((new \DateTime($aDados['dataInicial1'])));
 			(\Sistema\Autorizacao::getAutorizacaoSessao())->estaAutorizado();
 			\DB::startTransaction();
 			$oPrimeiroSemestre = new \Classes\Semestre();
@@ -77,6 +78,29 @@ class Instalacao{
 			require_once \Config\Caminho::getView()."instalacao/turmas.php";
 		}catch(\Exception $e){
 			echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+		}
+	}
+	public static function salvarTurma(array $aDados){
+		try{
+			(\Sistema\Autorizacao::getAutorizacaoSessao())->estaAutorizado();
+			\DB::startTransaction();
+			for($i = 1; $i <= $aDados['quantidadeTurmaManha']; $i++){
+				$oTurma = new \Classes\Turma();
+				$oTurma->setNome("Turma {$i} da manhã");
+				$oTurma->setTurno((new \Comum\Classes\TurnoEnum())->Manha());
+				$oTurma->criar();
+			}
+			for($i = 1; $i <= $aDados['quantidadeTurmaTarde']; $i++){
+				$oTurma = new \Classes\Turma();
+				$oTurma->setNome("Turma {$i} da tarde");
+				$oTurma->setTurno((new \Comum\Classes\TurnoEnum())->Tarde());
+				$oTurma->criar();
+			}
+			\DB::commit();
+			\Sistema\Roteador::redirecionar("/controller/instalacao.php?acao=turmas");
+		}catch(\Exception $e){
+			echo 'Exceção capturada: ',  $e->getMessage(), "\n";
+			\DB::rollback();
 		}
 	}	
 }
