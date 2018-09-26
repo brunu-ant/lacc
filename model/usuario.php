@@ -28,4 +28,7 @@ class Usuario{
 		$oUsuario->setSenha($aDados['senha']);
 		return $oUsuario;
 	}
+	public static function consultar(\Classes\Conta $oConta): array{
+		return \DB::query("SELECT * FROM usuario WHERE conta=%i", $oConta->getId());
+	}
 }
