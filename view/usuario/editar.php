@@ -6,35 +6,59 @@
 <body>
   <?php require_once \Config\Caminho::getInclude()."nav.php";?>
   <div class="container">
-          <h2>Atualizando o usuário</h2>
-            <form action="/lacc/controller/usuario.php" method="post">
-              <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" name="nome" id="nome" class="form-control" placeholder="Informe o nome do usuario">
+      <h4 class="mb-3">Atualizando o usuario</h4>
+      <form action="/lacc/controller/usuario.php" method="post">
+      <div class="row">
+         <div class="col-md-12 mb-3">
+            <label for="perfil">Perfil</label>
+                <select class="custom-select d-block w-100" id="perfil" required>
+                  <?php
+                  \Sistema\Funcoes::montarOptionEnum((new \Comum\Classes\PerfilUsuarioEnum), $oUsuario->getPerfil());
+                  ?>
+                </select>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-12 mb-3">
+            <label for="nome">Nome</label>
+             <input type="text" name="nome" id="nome" class="form-control" placeholder="Informe o nome do usuario" value="<?php echo $oUsuario->getNome()?>">
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-12 mb-3">
+            <label for="username">E-mail</label>
+            <div class="input-group">
+               <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+               </div>
+               <input type="text" class="form-control" id="email" placeholder="E-mail" value="<?php echo $oUsuario->getEmail()?>" required>
+               <div class="invalid-feedback" style="width: 100%;">
+                  Informe um e-mail valido.
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-12">
+            <label>Ativo</label>
+            <div class="d-block">
+              <div class="custom-control custom-radio">
+                <input id="sim" name="ativo" type="radio" class="custom-control-input" checked required>
+                <label class="custom-control-label" for="sim">Sim</label>
               </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input name="email" type="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Informe seu e-mail aqui">
-                <small id="emailHelp" class="form-text text-muted">Nao iremos compartilhar o seu e-mail com ninguem</small>
+              <div class="custom-control custom-radio">
+                <input id="nao" name="ativo" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="nao">Não</label>
               </div>
-              <div class="form-group">
-                <label for="senha">Senha</label>
-                <input name="senha" id="senha" type="password" class="form-control" placeholder="Informe aqui a senha">
-              </div>
-              <div class="form-group">
-                <label for="senha">Confirmar senha</label>
-                <input name="senha" id="senha" type="password" class="form-control" placeholder="Informe aqui a senha">
-              </div>
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-secondary active">
-                    <input type="radio" name="ano" id="esteAno" value="<?php echo (new \DateTime())->format("Y")?>" autocomplete="off" checked> Este ano
-                  </label>
-                  <label class="btn btn-secondary">
-                    <input type="radio" name="ano" id="proximoAno" value="<?php echo (new \DateTime())->add(new DateInterval('P1Y'))->format("Y")?>" autocomplete="off"> Proximo ano
-                  </label>
-              </div>
-              <input name="acao" type="submit" class="btn btn-primary" value="Atualizar">
-            </form>
+           </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-12 my-3">
+            <input name="acao" type="submit" class="btn btn-primary" value="Atualizar">
+         </div>
+      </div>
+      </form>
   </div>
   <?php require_once \Config\Caminho::getInclude()."bootstrap.php";?>
 </body>

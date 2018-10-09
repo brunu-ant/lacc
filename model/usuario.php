@@ -15,8 +15,15 @@ class Usuario{
 		);
 		return \DB::insertId();
 	}
+	public static function getUsuarioById(int $iId) : \Classes\Usuario {
+		$aDados = \DB::queryFirstRow("SELECT * FROM usuario WHERE id=%i", $iId);
+		return self::getUsuario($aDados);
+	}
 	public static function getUsuarioByEmail(string $sEmail) : \Classes\Usuario {
 		$aDados = \DB::queryFirstRow("SELECT * FROM usuario WHERE email=%s", $sEmail);
+		return self::getUsuario($aDados);
+	}
+	private static function getUsuario(array $aDados) : \Classes\Usuario{
 		$oUsuario = new \Classes\Usuario();
 		$oUsuario->setId($aDados['id']);
 		$oUsuario->setNome($aDados['nome']);

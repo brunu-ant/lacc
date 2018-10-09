@@ -9,6 +9,7 @@ require_once \Config\Caminho::getLib()."sistema/roteador.php";
 require_once \Config\Caminho::getLib()."sistema/autenticacao.php";
 require_once \Config\Caminho::getLib()."sistema/autorizacao.php";
 require_once \Config\Caminho::getLib()."sistema/sessao.php";
+require_once \Config\Caminho::getLib()."sistema/funcoes.php";
 require_once \Config\Caminho::getClasses()."conta.php";
 require_once \Config\Caminho::getClasses()."usuario.php";
 require_once \Config\Caminho::getClasses()."ano.php";
@@ -27,6 +28,7 @@ class Login{
     public static function editar(array $aDados){
         try{
             (\Sistema\Autorizacao::getAutorizacaoSessao())->estaAutorizado();
+            $oUsuario = \Model\Usuario::getUsuarioById($aDados["id"]);
             require_once \Config\Caminho::getView()."usuario/editar.php";
         }catch(\Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
