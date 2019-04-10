@@ -15,6 +15,32 @@ class Usuario{
 		);
 		return \DB::insertId();
 	}
+	public static function atualizar(\Classes\Usuario $oUsuario): int{
+		$aColunas = [];
+		if (!empty($oUsuario->getNome())){
+			$aColunas["nome"] = $oUsuario->getNome();
+		}
+		if (!empty($oUsuario->getSenha())){
+			$aColunas["senha"] = $oUsuario->getSenha();
+		}
+		if (!empty($oUsuario->getConta()->getId())){
+			$aColunas["conta"] = $oUsuario->getConta()->getId();
+		}
+		if (!empty($oUsuario->getPerfil())){
+			$aColunas["perfil"] = $oUsuario->getPerfil();
+		}
+		if (!empty($oUsuario->getEmail())){
+			$aColunas["email"] = $oUsuario->getEmail();
+		}
+		if (!empty($oUsuario->getDataCadastro())){
+			$aColunas["dataCadastro"] = $oUsuario->getDataCadastro();
+		}
+		if (!empty($oUsuario->getAtivo())){
+			$aColunas["ativo"] = $oUsuario->getAtivo();
+		}
+
+		return \DB::update('usuario', $aColunas, "id=%i", $oUsuario->getId());
+	}
 	public static function getUsuarioById(int $iId) : \Classes\Usuario {
 		$aDados = \DB::queryFirstRow("SELECT * FROM usuario WHERE id=%i", $iId);
 		return self::getUsuario($aDados);

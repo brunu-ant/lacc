@@ -26,21 +26,29 @@ class Usuario{
 			return true;
 		}
 	}
-	public function eValida(){
+
+	public function atualizar(){
+		if (!$this->eValida()){
+			return false;
+		}
+
+		\Model\Usuario::atualizar($this);
+	}
+	private function eValida(){
 		if (empty($this->sNome)){
-			throw new Exception("Informe o nome");
+			throw new \Exception("Informe o nome");
 		}
 		if (empty($this->sSenha)){
-			throw new Exception("Informe a senha");
+			throw new \Exception("Informe a senha");
 		}
 		if (empty($this->sEmail)){
-			throw new Exception("Informe o email");
+			throw new \Exception("Informe o email");
 		}
 		if (empty($this->iPerfilUsuario)){
-			throw new Exception("Informe o perfil de usuario");
+			throw new \Exception("Informe o perfil de usuario");
 		}
 		if (empty($this->oConta)){
-			throw new Exception("Informe a conta");
+			throw new \Exception("Informe a conta");
 		}
 		return true;
 	}

@@ -8,6 +8,7 @@ class Caminho{
 	private static $classes = "/classes/";
 	private static $model = "/model/";
 	private static $comum = "/comum/";
+	private static $app = "/lacc";
 
 	public static function getInclude() : string{
 		return $_SERVER["DOCUMENT_ROOT"]."/lacc".self::$include;
@@ -26,5 +27,8 @@ class Caminho{
 	}
 	public static function getComum() : string{
 		return $_SERVER["DOCUMENT_ROOT"]."/lacc".self::$comum;
+	}
+	public static function getUrlApp() : string{
+		return self::$app;
 	}
 }

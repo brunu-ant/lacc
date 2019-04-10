@@ -7,6 +7,12 @@
   <?php require_once \Config\Caminho::getInclude()."nav.php";?>
   <main role="main" class="container">
       <div class="starter-template">
+         <div class="row">
+            <div class="col-md-6 my-3">
+               <a href="<?php echo \Config\Caminho::getUrlApp()?>/controller/usuario.php?acao=novo" class="btn btn-primary">Novo</a>
+            </div>
+         </div>
+
           <h2>Lista de usuários</h2>
           <div class="table-responsive">
              <table class="table table-striped table-sm">
