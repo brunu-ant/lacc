@@ -12,15 +12,17 @@ require_once \Config\Caminho::getLib()."sistema/sessao.php";
 require_once \Config\Caminho::getLib()."sistema/funcoes.php";
 require_once \Config\Caminho::getClasses()."conta.php";
 require_once \Config\Caminho::getClasses()."usuario.php";
+require_once \Config\Caminho::getClasses()."turma.php";
 require_once \Config\Caminho::getClasses()."ano.php";
 require_once \Config\Caminho::getComum()."classes/perfilusuario.php";
 require_once \Config\Caminho::getComum()."classes/simnao.php";
+require_once \Config\Caminho::getComum()."classes/turno.php";
 
-class Usuario{
+class Turma{
 	public static function consultar(array $aDados){
 		try{
 			(\Sistema\Autorizacao::getAutorizacaoSessao())->estaAutorizado();
-			require_once \Config\Caminho::getView()."usuario/consultar.php";
+			require_once \Config\Caminho::getView()."turma/consultar.php";
 		}catch(\Exception $e){
 			echo 'Exceção capturada: ',  $e->getMessage(), "\n";
 		}
@@ -28,7 +30,7 @@ class Usuario{
     public static function novo(array $aDados){
         try{
             (\Sistema\Autorizacao::getAutorizacaoSessao())->estaAutorizado();
-            require_once \Config\Caminho::getView()."usuario/novo.php";
+            require_once \Config\Caminho::getView()."turma/novo.php";
         }catch(\Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }
@@ -48,13 +50,13 @@ class Usuario{
         }catch(\Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }
-        require_once \Config\Caminho::getView()."usuario/consultar.php";
+        require_once \Config\Caminho::getView()."turma/consultar.php";
     }
     public static function editar(array $aDados){
         try{
             (\Sistema\Autorizacao::getAutorizacaoSessao())->estaAutorizado();
-            $oUsuario = \Model\Usuario::getUsuarioById($aDados["id"]);
-            require_once \Config\Caminho::getView()."usuario/editar.php";
+            $oTurma = \Model\Turma::getTurmaById($aDados["id"]);
+            require_once \Config\Caminho::getView()."turma/editar.php";
         }catch(\Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }
@@ -72,7 +74,7 @@ class Usuario{
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }
         
-        require_once \Config\Caminho::getView()."usuario/consultar.php";
+        require_once \Config\Caminho::getView()."turma/consultar.php";
     }
     public static function apagar(array $aDados){
         try{
@@ -80,10 +82,10 @@ class Usuario{
             $oUsuario = \Model\Usuario::getUsuarioById($aDados["id"]);
             \Model\Usuario::apagar($oUsuario);
 
-            require_once \Config\Caminho::getView()."usuario/consultar.php";
+            require_once \Config\Caminho::getView()."turma/consultar.php";
         }catch(\Exception $e){
             echo 'Exceção capturada: ',  $e->getMessage(), "\n";
         }
     }
 }
-\Sistema\Roteador::mapearRequisicao("Usuario", $_REQUEST);
+\Sistema\Roteador::mapearRequisicao("Turma", $_REQUEST);

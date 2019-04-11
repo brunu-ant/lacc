@@ -11,6 +11,7 @@ class Usuario{
 	private $iPerfilUsuario;
 	private $iAtivo;
 	private $oDataCadastro;
+	private $iStatus;
 	
 	public function __construct(){
 		$this->iAtivo = (new \Comum\Classes\SimNaoEnum())->Sim();
@@ -76,6 +77,9 @@ class Usuario{
 	public function getDataCadastro(): \DateTime{
 		return $this->oDataCadastro;
 	}
+	public function getStatus(): int{
+		return $this->iStatus;
+	}
 	public function setId(int $iId){
 		$this->iId = $iId;
 	}
@@ -102,5 +106,8 @@ class Usuario{
 	}
 	public function setDataCadastro(\DateTime $oDataCadastro){
 		$this->dataCadastro = $oDataCadastro;
+	}
+	public function setStatus(int $iStatus){
+		$this->iStatus = $iStatus;
 	}
 }

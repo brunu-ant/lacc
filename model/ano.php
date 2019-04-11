@@ -29,4 +29,16 @@ class Ano{
 		$oAno->setDataCadastro(new \DateTime($aDados['dataCadastro']));
 		return $oAno;
 	}
+	public static function consultarCombo(\Classes\Conta $oConta): array{
+		$sSql = "SELECT 
+					id, 
+					valor
+				 FROM 
+				 	ano 
+				 WHERE 
+				 	conta=%i AND
+				 	status=%i";
+
+		return \DB::query($sSql, $oConta->getId(), \Comum\Classes\SimNaoEnum::Sim());
+	}
 }

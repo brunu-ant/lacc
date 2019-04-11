@@ -9,7 +9,7 @@ class Turma{
 	private $sNome;
 	private $iTurno;
 	private $iAtivo;
-
+	private $iStatus;
 
 	public function __construct(){
 		$this->oConta = (\Sistema\Autorizacao::getAutorizacaoSessao())->getUsuario()->getConta();
@@ -46,6 +46,9 @@ class Turma{
 	public function getAtivo(): int{
 		return $this->iAtivo;
 	}
+	public function getStatus(): int{
+		return $this->iStatus;
+	}
 	public function setId(int $iId){
 		$this->iId = $iId;
 	}
@@ -63,5 +66,8 @@ class Turma{
 	}
 	public function setAtivo(int $iAtivo){
 		$this->iAtivo = $iAtivo;
+	}
+	public function setStatus(int $iStatus){
+		$this->iStatus = $iStatus;
 	}
 }

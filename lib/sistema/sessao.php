@@ -13,6 +13,8 @@ class Sessao{
 	}
 	public static function get(string $sChave){
 		self::iniciar();
-		return $_SESSION[$sChave];
+		if (!empty($_SESSION[$sChave])){
+			return $_SESSION[$sChave];
+		}
 	}
 }

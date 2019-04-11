@@ -15,7 +15,7 @@ require_once \Config\Caminho::getClasses()."ano.php";
 require_once \Config\Caminho::getComum()."classes/perfilusuario.php";
 require_once \Config\Caminho::getComum()."classes/simnao.php";
 
-class Login{
+class Home{
 	public static function index(array $aDados){
 		try{
 			(\Sistema\Autorizacao::getAutorizacaoSessao())->estaAutorizado();
@@ -25,4 +25,4 @@ class Login{
 		}
 	}
 }
-\Sistema\Roteador::mapearRequisicao("Login", $_REQUEST);
+\Sistema\Roteador::mapearRequisicao("Home", $_REQUEST);

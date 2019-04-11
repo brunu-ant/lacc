@@ -28,6 +28,7 @@ class Login{
 			$oAutorizacao->autorizar();
 			$oConta = $oAutorizacao->getUsuario()->getConta();
 			$oConta->registrarSessao();
+			\Sistema\Roteador::redirecionar("/controller/home.php?acao=index");
 		}catch(\Exception $e){
 			echo $e->getMessage();
 		}

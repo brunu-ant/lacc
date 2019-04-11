@@ -15,7 +15,7 @@ class Usuario{
 		);
 		return \DB::insertId();
 	}
-	public static function atualizar(\Classes\Usuario $oUsuario): int{
+	public static function atualizar(\Classes\Usuario $oUsuario): bool{
 		$aColunas = [];
 		if (!empty($oUsuario->getNome())){
 			$aColunas["nome"] = $oUsuario->getNome();
@@ -59,9 +59,14 @@ class Usuario{
 		$oUsuario->setDataCadastro(new \DateTime($aDados['dataCadastro']));
 		$oUsuario->setAtivo($aDados['ativo']);
 		$oUsuario->setSenha($aDados['senha']);
+		$oUsuario->setStatus($aDados['status']);
 		return $oUsuario;
 	}
 	public static function consultar(\Classes\Conta $oConta): array{
-		return \DB::query("SELECT * FROM usuario WHERE conta=%i", $oConta->getId());
+		return \DB::query("SELECT * FROM usuario WHERE conta=%i AND status=%i ", $oConta->getId(), \Comum\Classes\SimNaoEnum::Sim());
+	}
+	public static function apagar(\Classes\Usuario $oUsuario): bool{
+		$aColunas = ["status" => \Comum\Classes\SimNaoEnum::Nao()];
+		return \DB::update('usuario', $aColunas, "id=%i", $oUsuario->getId());
 	}
 }

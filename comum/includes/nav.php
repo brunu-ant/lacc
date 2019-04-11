@@ -6,10 +6,13 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-         <a class="nav-link" href="#">Início <span class="sr-only">(current)</span></a>
+         <a class="nav-link" href="<?php echo \Config\Caminho::getUrlApp()?>/controller/home.php?acao=index">Início <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="usuario.php?acao=consultar">Usuários</a>
+        <a class="nav-link" href="usuario.php?acao=consultar">Usuários</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="turma.php?acao=consultar">Turmas</a>
       </li>
     </ul>
   </div>
